@@ -4,7 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "atomity-core": "file:..\\AtomityCore",
+    "atomity-core": "git+https://github.com/qnium/AtomityFrontendCommon.git",
     "rc-calendar": "^7.8.0",
     "react": "^15.4.2",
     "react-bootstrap": "0.30.8",
@@ -31,6 +31,6 @@
     ]
   },
   "scripts": {
-    "compile": "set NODE_ENV=production&& babel -d lib/ src/ --copy-files"
+    "build": "set NODE_ENV=production&& babel -d lib/ src/ --copy-files"
   }
 }
