@@ -13,7 +13,9 @@ import QRowChecker from './components/QRowChecker';
 import QSelectFilter from './components/QSelectFilter';
 import QTable from './components/QTable';
 import QTableHeader from './components/QTableHeader';
+import QForm from './components/QForm';
+import QFormControl from './components/QFormControl';
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
-    QTable, QTableHeader }
+    QTable, QTableHeader, QForm, QFormControl }

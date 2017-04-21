@@ -3,14 +3,18 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import {SelectFilterController} from 'atomity-core';
+import {ListControllerEvents} from 'atomity-core';
+import events from 'qnium-events';
 
 class QSelectFilter extends Component 
 {    
     constructor(props)
     {
         super(props);
+        let self = this;
         
-        this.filterCtrl = new SelectFilterController(this.props);
+        let listCtrlParams = Object.assign({}, this.props);
+        this.filterCtrl = new SelectFilterController(listCtrlParams);
         
         this.state = {
             options: []
@@ -19,15 +23,17 @@ class QSelectFilter extends Component
         this.onChangeFilterValue = (e) => {
             this.filterCtrl.applyFilter(e.target.value);
         }
-    }
-    
-    componentDidMount()
-    {
-        this.filterCtrl.loadOptions().then(result => {
-            this.setState({options: result});
+        
+        events(ListControllerEvents.stateChanged).handle(event =>
+        {
+            if(event.data.ctrlName === self.filterCtrl.listCtrl.ctrlName && self.props.entitiesName === event.data.entitiesName && !event.data.actionInProgress) {
+                self.setState({
+                    options: event.data.pageData.map(item => item.data)
+                });
+            }
         });
     }
-
+    
     renderOptions()
     {
         return this.state.options.map((item, index) => {
