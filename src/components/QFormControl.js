@@ -15,6 +15,7 @@ class QFormControl extends React.Component
             controlValue: this.props.entityObject[this.props.bindingField],
             selectOptions: []
         };
+        this.selectCtrlInitialized = false;
     }
 
     onChange(event)
@@ -72,6 +73,10 @@ class QFormControl extends React.Component
                     self.setState({
                         selectOptions: event.data.pageData.map(item => item.data)
                     });
+                }
+                if(!self.selectCtrlInitialized && event.data.pageData.length > 0) {
+                    self.selectCtrlInitialized = true;
+                    self.onSelectChange({target: {value: self.state.controlValue}});
                 }
             });
         }
