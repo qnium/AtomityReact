@@ -4,8 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {FileDataProvider as dataProvider} from 'atomity-core'
-import {ListControllerEvents} from 'atomity-core';
+import {DataProviderRegistry, ListControllerEvents} from 'atomity-core';
 import events from 'qnium-events';
 
 import QFormControl from './QFormControl';
@@ -16,7 +15,7 @@ class QForm extends React.Component {
     {
         super(props);
         let self = this;
-
+        this.dataProvider = DataProviderRegistry.get(this.props.dataProviderName);
         this.state = {showDialog : true}
         
         this.closeDialog = function(ev){
@@ -30,7 +29,7 @@ class QForm extends React.Component {
 
         this.ok = function()
         {
-            dataProvider.executeAction(self.props.entitiesName, self.props.okAction, [self.props.entityObject]).then(result => {
+            self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, [self.props.entityObject]).then(result => {
                 self.closeDialog();
                 self.props.onDialogClose("'dialogOk'");
                 let entitiesToRefresh = [self.props.entitiesName];

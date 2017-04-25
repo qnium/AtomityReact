@@ -1,6 +1,5 @@
 import React from 'react';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {FileDataProvider as dataProvider} from 'atomity-core'
 import {ListControllerEvents} from 'atomity-core';
 import {ListController} from 'atomity-core';
 import events from 'qnium-events';
@@ -64,7 +63,8 @@ class QFormControl extends React.Component
             this.listCtrl = new ListController({
                 entitiesName: this.props.relatedEntitiesName,
                 readAction: this.props.readAction,
-                pageDataLength: 0
+                pageDataLength: 0,
+                dataProviderName: this.props.dataProviderName
             });
             let self = this;
             this.handlerRemover = events(ListControllerEvents.stateChanged).handle(event =>
