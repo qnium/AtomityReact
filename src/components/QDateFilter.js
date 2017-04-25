@@ -28,8 +28,6 @@ class QDateFilter extends Component
 
         this.onChangeFilterValue = (e) =>
         {
-            console.log(e.toString());
-            console.log(e);
             self.filterCtrl.applyFilter(e);
         }
     }
