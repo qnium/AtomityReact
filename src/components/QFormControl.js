@@ -67,8 +67,8 @@ class QFormControl extends React.Component
                 pageDataLength: 0
             });
             let self = this;
-            events(ListControllerEvents.stateChanged).handle(event =>
-            {
+            this.handlerRemover = events(ListControllerEvents.stateChanged).handle(event =>
+            {                
                 if(event.data.ctrlName === self.listCtrl.ctrlName && self.props.relatedEntitiesName === event.data.entitiesName && !event.data.actionInProgress) {
                     self.setState({
                         selectOptions: event.data.pageData.map(item => item.data)
@@ -80,6 +80,12 @@ class QFormControl extends React.Component
                 }
             });
         }
+    }
+
+    componentWillUnmount() {
+        if(this.handlerRemover) {
+            this.handlerRemover();
+        }        
     }
 
     renderControl()
