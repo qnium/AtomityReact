@@ -15,7 +15,9 @@ import QTable from './components/QTable';
 import QTableHeader from './components/QTableHeader';
 import QForm from './components/QForm';
 import QFormControl from './components/QFormControl';
+import QSelectControl from './components/QSelectControl';
+import QInputControl from './components/QInputControl';
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
-    QTable, QTableHeader, QForm, QFormControl }
+    QTable, QTableHeader, QForm, QFormControl, QSelectControl, QInputControl }
