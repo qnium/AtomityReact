@@ -66,8 +66,25 @@ class QForm extends React.Component {
 
     validateField(validationParams)
     {
+        let err = null;
         if(this.validators[validationParams.fieldName]) {
-            this.setState({validationError: this.validators[validationParams.fieldName](validationParams.value)});
+            err = this.validators[validationParams.fieldName](validationParams.value);
+            this.setState({validationError: err});
+        }
+        return err;
+    }
+
+    validateForm()
+    {
+        for(let key in this.validators)
+        {
+            let err = this.validateField({
+                fieldName: key,
+                value: this.props.entityObject[key]
+            });
+            if(err) {
+                return;
+            }
         }
     }
     
@@ -76,10 +93,13 @@ class QForm extends React.Component {
         if(childHandler) {
             childHandler(event);
         }
-        this.validateField( {
+        let err = this.validateField( {
             fieldName: event.bindingField,
             value: event.newValue
         });
+        if(!err){
+            this.validateForm();
+        }
     }
     
     renderRecursively(children, index)
@@ -135,7 +155,7 @@ class QForm extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.cancel}>{this.props.cancelButtonText}</Button>
-                    <Button bsStyle="primary" onClick={this.ok}>{this.props.okButtonText}</Button>
+                    <Button bsStyle="primary" disabled={this.state.validationError ? true : false} onClick={this.ok}>{this.props.okButtonText}</Button>
                 </Modal.Footer>
             </Modal>
         )
