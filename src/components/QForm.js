@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import Alert from 'react-bootstrap/lib/Alert';
 import {DataProviderRegistry, ListControllerEvents} from 'atomity-core';
 import events from 'qnium-events';
 
@@ -15,8 +16,26 @@ class QForm extends React.Component {
     {
         super(props);
         let self = this;
+        
         this.dataProvider = DataProviderRegistry.get(this.props.dataProviderName);
-        this.state = {showDialog : true}
+        
+        this.dataProvider.executeAction(self.props.entitiesName, "validators").then(result =>
+        {
+            this.validators = {};
+
+            if(result)
+            {
+                result.forEach(validator => {
+                    let fn;
+                    this.validators[validator.fieldName] = eval( "fn = " + validator.validationCode);
+                });
+            }
+        });
+
+        this.state = {
+            showDialog : true,
+            validationError: null
+        }
         
         this.closeDialog = function(ev){
             self.setState({showDialog: false});
@@ -45,6 +64,24 @@ class QForm extends React.Component {
         }
     }
 
+    validateField(validationParams)
+    {
+        if(this.validators[validationParams.fieldName]) {
+            this.setState({validationError: this.validators[validationParams.fieldName](validationParams.value)});
+        }
+    }
+    
+    onChange(childHandler, event)
+    {
+        if(childHandler) {
+            childHandler(event);
+        }
+        this.validateField( {
+            fieldName: event.bindingField,
+            value: event.newValue
+        });
+    }
+    
     renderRecursively(children, index)
     {        
         if(!children) {
@@ -53,7 +90,8 @@ class QForm extends React.Component {
 
         if(children.type === QFormControl) {
             return (
-                <QFormControl key={index} inputRef={children.ref} {...children.props} entityObject={this.props.entityObject}>
+                <QFormControl key={index} inputRef={children.ref} {...children.props} onChange={this.onChange.bind(this, children.props.onChange)}
+                    entityObject={this.props.entityObject}>
                     {children.props.children}
                 </QFormControl>
             );
@@ -74,6 +112,17 @@ class QForm extends React.Component {
         return children;
     }    
 
+    renderError()
+    {
+        if(this.state.validationError) {
+            return (
+                <Alert bsStyle="danger"><strong>Error: </strong>{this.state.validationError}</Alert>
+            );
+        } else {
+            return null;
+        }
+    }
+    
     render() {
         return (
             <Modal show={this.state.showDialog} onHide={this.cancel}>
@@ -81,6 +130,7 @@ class QForm extends React.Component {
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {this.renderError()}
                     {this.renderRecursively(this.props.children)}
                 </Modal.Body>
                 <Modal.Footer>

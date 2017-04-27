@@ -61,9 +61,11 @@ class QSelectControl extends React.Component
                         selectOptions: event.data.pageData.map(item => item.data)
                     });
                     
-                    if(!self.selectCtrlInitialized && event.data.pageData.length > 0) {
+                    if(!self.selectCtrlInitialized && event.data.pageData.length > 0 && self.props.onInit) {
                         self.selectCtrlInitialized = true;
-                        self.onChange({target: {value: self.state.controlValue}});
+                        self.props.onInit(
+                            self.state.selectOptions.find(item => item[self.props.valueField] == self.state.controlValue)
+                        );
                     }
                 }
             });
