@@ -27,7 +27,10 @@ class QForm extends React.Component {
             {
                 result.forEach(validator => {
                     let fn;
-                    this.validators[validator.fieldName] = eval( "fn = " + validator.validationCode);
+                    this.validators[validator.fieldName] = {
+                        validate: eval( "fn = " + validator.validationCode),
+                        fieldValidated: false
+                    };
                 });
             }
         });
@@ -67,23 +70,28 @@ class QForm extends React.Component {
     validateField(validationParams)
     {
         let err = null;
-        if(this.validators[validationParams.fieldName]) {
-            err = this.validators[validationParams.fieldName](validationParams.value);
+        let validator = this.validators[validationParams.fieldName];
+        if(validator) {
+            err = validator.validate(validationParams.value);
+            validator.fieldValidated = true;
             this.setState({validationError: err});
         }
         return err;
     }
 
-    validateForm()
+    validateForm(includeUnchangedFields)
     {
         for(let key in this.validators)
         {
-            let err = this.validateField({
-                fieldName: key,
-                value: this.props.entityObject[key]
-            });
-            if(err) {
-                return;
+            if(includeUnchangedFields || this.validators[key].fieldValidated)
+            {            
+                let err = this.validateField({
+                    fieldName: key,
+                    value: this.props.entityObject[key]
+                });
+                if(err) {
+                    break;
+                }
             }
         }
     }
@@ -97,7 +105,7 @@ class QForm extends React.Component {
             fieldName: event.bindingField,
             value: event.newValue
         });
-        if(!err){
+        if(!err) {
             this.validateForm();
         }
     }
