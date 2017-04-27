@@ -29,7 +29,11 @@ class QForm extends React.Component {
 
         this.ok = function()
         {
-            self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, [self.props.entityObject]).then(result => {
+            let entityObject = self.props.entityObject;
+            if(self.props.transformExp){
+                entityObject = eval(self.props.transformExp);
+            }
+            self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
                 self.closeDialog();
                 self.props.onDialogClose("'dialogOk'");
                 let entitiesToRefresh = [self.props.entitiesName];
