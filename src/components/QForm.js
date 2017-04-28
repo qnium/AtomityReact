@@ -5,7 +5,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Alert from 'react-bootstrap/lib/Alert';
-import {DataProviderRegistry, ListControllerEvents} from 'atomity-core';
+import { DataProviderRegistry, ListControllerEvents, ValidationController } from 'atomity-core';
 import events from 'qnium-events';
 
 import QFormControl from './QFormControl';
@@ -19,20 +19,9 @@ class QForm extends React.Component {
         
         this.dataProvider = DataProviderRegistry.get(this.props.dataProviderName);
         
-        this.dataProvider.executeAction(self.props.entitiesName, "validators").then(result =>
-        {
-            this.validators = {};
-
-            if(result)
-            {
-                result.forEach(validator => {
-                    let fn;
-                    this.validators[validator.fieldName] = {
-                        validate: eval( "fn = " + validator.validationCode),
-                        fieldValidated: false
-                    };
-                });
-            }
+        this.validationCtrl = new ValidationController({
+            dataProviderName: this.props.dataProviderName,
+            entitiesName: this.props.entitiesName
         });
 
         this.state = {
@@ -67,49 +56,22 @@ class QForm extends React.Component {
         }
     }
 
-    validateField(validationParams)
-    {
-        let err = null;
-        let validator = this.validators[validationParams.fieldName];
-        if(validator) {
-            err = validator.validate(validationParams.value);
-            validator.fieldValidated = true;
-            this.setState({validationError: err});
-        }
-        return err;
-    }
-
-    validateForm(includeUnchangedFields)
-    {
-        for(let key in this.validators)
-        {
-            if(includeUnchangedFields || this.validators[key].fieldValidated)
-            {            
-                let err = this.validateField({
-                    fieldName: key,
-                    value: this.props.entityObject[key]
-                });
-                if(err) {
-                    break;
-                }
-            }
-        }
-    }
-    
     onChange(childHandler, event)
     {
         if(childHandler) {
             childHandler(event);
         }
-        let err = this.validateField( {
+        
+        let err = this.validationCtrl.validateField({
+            entityObject: this.props.entityObject,
             fieldName: event.bindingField,
-            value: event.newValue
+            validateOtherFields: true,
+            includeUnchangedFields: false
         });
-        if(!err) {
-            this.validateForm();
-        }
+
+        this.setState({validationError: err});
     }
-    
+        
     renderRecursively(children, index)
     {        
         if(!children) {
