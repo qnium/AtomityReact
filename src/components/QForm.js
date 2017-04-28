@@ -10,6 +10,11 @@ import events from 'qnium-events';
 
 import QFormControl from './QFormControl';
 
+let DialogResult = {
+    ok: "ok",
+    cancel: "cancel"
+}
+
 class QForm extends React.Component {
     
     constructor(props)
@@ -35,7 +40,7 @@ class QForm extends React.Component {
 
         this.cancel = function() {
             self.closeDialog();
-            self.props.onDialogClose("'dialogCancel'");
+            self.props.onDialogClose({dialogResult: DialogResult.cancel});
         }
 
         this.ok = function()
@@ -46,7 +51,7 @@ class QForm extends React.Component {
             }
             self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
                 self.closeDialog();
-                self.props.onDialogClose("'dialogOk'");
+                self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
                 let entitiesToRefresh = [self.props.entitiesName];
                 if(self.props.entitiesToRefresh) {
                     entitiesToRefresh = entitiesToRefresh.concat(self.props.entitiesToRefresh);
@@ -71,7 +76,7 @@ class QForm extends React.Component {
 
         this.setState({validationError: err});
     }
-        
+
     renderRecursively(children, index)
     {        
         if(!children) {
@@ -132,4 +137,5 @@ class QForm extends React.Component {
     }
 }
 
+export {DialogResult};
 export default QForm;
