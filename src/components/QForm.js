@@ -31,7 +31,8 @@ class QForm extends React.Component {
 
         this.state = {
             showDialog : true,
-            validationError: null
+            validationError: null,
+            actionAllowed: true
         }
         
         this.closeDialog = function(ev){
@@ -49,6 +50,7 @@ class QForm extends React.Component {
             if(self.props.useArray === true){
                 entityObject = [self.props.entityObject];
             }
+            self.setState({validationError: null});
             self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
                 self.closeDialog();
                 self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
@@ -57,6 +59,11 @@ class QForm extends React.Component {
                     entitiesToRefresh = entitiesToRefresh.concat(self.props.entitiesToRefresh);
                 }
                 events(ListControllerEvents.updateEntities).send(entitiesToRefresh);
+            }).catch(err => {
+                self.setState({
+                    validationError: err.ext ? err.message : "Server inaccessible.",
+                    actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true
+                });
             });
         }
     }
@@ -74,7 +81,7 @@ class QForm extends React.Component {
             includeUnchangedFields: false
         });
 
-        this.setState({validationError: err});
+        this.setState({validationError: err, actionAllowed: err == null});
     }
 
     renderRecursively(children, index)
