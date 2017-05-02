@@ -10,8 +10,12 @@ class QSelectControl extends React.Component
     {
         super(props);
 
+        if(!this.props.entityObject[this.props.bindingField]){
+            this.props.entityObject[this.props.bindingField] = {};
+            this.props.entityObject[this.props.bindingField][this.props.valueField] = 0;
+        }
         this.state = {
-            controlValue: this.props.entityObject[this.props.bindingField],
+            controlValue: this.props.entityObject[this.props.bindingField][this.props.valueField],
             selectOptions: []
         };
         this.selectCtrlInitialized = false;
@@ -19,17 +23,17 @@ class QSelectControl extends React.Component
 
     onChange(event)
     {
-        let oldValue = this.state.controlValue;
+        let oldValue = this.state.selectOptions.find(item => item[this.props.valueField] == this.state.controlValue);
+        let selectedItem = this.state.selectOptions.find(item => item[this.props.valueField] == event.target.value);
         this.setState({controlValue: event.target.value});
+        this.props.entityObject[this.props.bindingField] = selectedItem;
         
         if(this.props.onChange)
         {
-            let selectedItem = this.state.selectOptions.find(item => item[this.props.valueField] == event.target.value);
             this.props.onChange({
                 bindingField: this.props.bindingField,
                 oldValue: oldValue,
-                newValue: event.target.value,
-                selectedItem: selectedItem
+                newValue: selectedItem
             });
         }
     }
