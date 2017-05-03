@@ -10,9 +10,11 @@ body {
 
 .q-row-button {
   visibility: hidden;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
-.q-row-button:hover {
+.q-row-button:hover .badge {
   background-color: white;
   color: black;
   visibility: visible;
@@ -23,7 +25,7 @@ body {
   color: #ffffff;
 }
 
-.q-table tbody tr:hover .badge {
+.q-table tbody tr:hover .q-row-button {
   visibility: visible;
 }
 

@@ -33,7 +33,7 @@ class QAction extends Component {
         let actionTemplate;
 
         if(this.props.children){
-            actionTemplate = (<span onClick={this.onClick}>{this.props.children}</span>)
+            actionTemplate = (<span className={this.props.className} style={{cursor: this.props.cursor || 'pointer'}} onClick={this.onClick}>{this.props.children}</span>)
         } else {
             actionTemplate = (
                 <Glyphicon title={this.props.title} glyph={this.props.icon} onClick={this.onClick}>
@@ -41,7 +41,7 @@ class QAction extends Component {
                 </Glyphicon>
             )
         }
-        return (<span className="q-action">{actionTemplate}</span>)
+        return (actionTemplate)
     }
 }
 

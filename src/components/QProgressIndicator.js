@@ -34,7 +34,7 @@ class QProgressIndicator extends Component
 
     render() {
         return (                
-            <Glyphicon className="pull-right" glyph='repeat' style={{color: this.state.inProgress ? '#a0a0a0' : null}}>
+            <Glyphicon className="pull-right" title={this.props.title} glyph='repeat' style={{color: this.state.inProgress ? '#a0a0a0' : null}}>
                 {this.props.children}
             </Glyphicon>
         );

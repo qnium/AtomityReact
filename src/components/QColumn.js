@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import createFragment from 'react-addons-create-fragment';
 import QAction from './QAction';
 import QRowChecker from './QRowChecker';
 
@@ -13,7 +12,7 @@ class QColumn extends Component {
     renderRecursively(children, index)
     {        
         if(children.type === QAction) {
-            return <QAction {...children.props} val={this.props.val} />
+            return <QAction {...children.props} className={this.props.isHoverButtons ? "q-row-button" : ""} key={index}  val={this.props.val} />
         }
 
         if(children.type === QRowChecker) {
@@ -27,9 +26,8 @@ class QColumn extends Component {
             return children.map((child, index) => this.renderRecursively(child, index));
         }
 
-        if(children.props && children.props.children){
-            return React.createElement(children.type, {key: index, ...children.props,
-                className: this.props.isHoverButtons ? "q-row-button" : ""}, this.renderRecursively(children.props.children));
+        if(children.props && children.props.children) {
+            return React.createElement(children.type, {key: index, ...children.props}, this.renderRecursively(children.props.children));
         }
 
         if(typeof children === "function"){
