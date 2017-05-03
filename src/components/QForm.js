@@ -6,10 +6,10 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Alert from 'react-bootstrap/lib/Alert';
 import FontAwesome from 'react-fontawesome';
-import { DataProviderRegistry, ListControllerEvents, ValidationController } from 'atomity-core';
+import { DataProviderRegistry, ListControllerEvents, ValidationController, DialogService } from 'atomity-core';
 import events from 'qnium-events';
-
 import QFormControl from './QFormControl';
+import ActionConfirmationForm from './ActionConfirmationForm';
 
 let DialogResult = {
     ok: "ok",
@@ -23,12 +23,15 @@ class QForm extends React.Component {
         super(props);
         let self = this;
         
-        this.dataProvider = DataProviderRegistry.get(this.props.dataProviderName);
-        
-        this.validationCtrl = new ValidationController({
-            dataProviderName: this.props.dataProviderName,
-            entitiesName: this.props.entitiesName
-        });
+        if(this.props.entitiesName)
+        {
+            this.dataProvider = DataProviderRegistry.get(this.props.dataProviderName);
+
+            this.validationCtrl = new ValidationController({
+                dataProviderName: this.props.dataProviderName,
+                entitiesName: this.props.entitiesName
+            });
+        }
 
         this.state = {
             showDialog : true,
@@ -46,28 +49,48 @@ class QForm extends React.Component {
             self.props.onDialogClose({dialogResult: DialogResult.cancel});
         }
 
+        this.doAction = function()
+        {
+            if(self.props.entitiesName && self.props.okAction)
+            {
+                let entityObject = self.props.entityObject;
+                if(self.props.useArray === true){
+                    entityObject = [self.props.entityObject];
+                }
+                self.setState({validationError: null, actionInProgress: true, actionAllowed: false});
+                self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
+                    self.closeDialog();
+                    self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
+                    let entitiesToRefresh = [self.props.entitiesName];
+                    if(self.props.entitiesToRefresh) {
+                        entitiesToRefresh = entitiesToRefresh.concat(self.props.entitiesToRefresh);
+                    }
+                    events(ListControllerEvents.updateEntities).send(entitiesToRefresh);
+                }).catch(err => {
+                    self.setState({
+                        validationError: err.ext ? err.message : "Server inaccessible.",
+                        actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true,
+                        actionInProgress: false
+                    });
+                });
+            } else {
+                self.closeDialog();
+                self.props.onDialogClose({dialogResult: DialogResult.ok});
+            }
+        }
+        
         this.ok = function()
         {
-            let entityObject = self.props.entityObject;
-            if(self.props.useArray === true){
-                entityObject = [self.props.entityObject];
+            if(self.props.disableConfirmation === true) {
+                self.doAction();
+            } else {
+                DialogService.showDialog(ActionConfirmationForm).then(result =>
+                {
+                    if(result.dialogResult === DialogResult.ok) {
+                        self.doAction();
+                    }            
+                });            
             }
-            self.setState({validationError: null, actionInProgress: true, actionAllowed: false});
-            self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
-                self.closeDialog();
-                self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
-                let entitiesToRefresh = [self.props.entitiesName];
-                if(self.props.entitiesToRefresh) {
-                    entitiesToRefresh = entitiesToRefresh.concat(self.props.entitiesToRefresh);
-                }
-                events(ListControllerEvents.updateEntities).send(entitiesToRefresh);
-            }).catch(err => {
-                self.setState({
-                    validationError: err.ext ? err.message : "Server inaccessible.",
-                    actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true,
-                    actionInProgress: false
-                });
-            });
         }
     }
 
