@@ -16,7 +16,7 @@ class QAction extends Component {
         this.onClick = function()
         {
             if(self.props.workflow) {
-                self.props.workflow.start(self.props.val);
+                self.props.workflow.start(self.props.val, self.props.workflowParams);
                 return;
             }
             
