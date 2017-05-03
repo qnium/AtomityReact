@@ -5,6 +5,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Alert from 'react-bootstrap/lib/Alert';
+import FontAwesome from 'react-fontawesome';
 import { DataProviderRegistry, ListControllerEvents, ValidationController } from 'atomity-core';
 import events from 'qnium-events';
 
@@ -32,7 +33,8 @@ class QForm extends React.Component {
         this.state = {
             showDialog : true,
             validationError: null,
-            actionAllowed: true
+            actionAllowed: true,
+            actionInProgress: false
         }
         
         this.closeDialog = function(ev){
@@ -50,7 +52,7 @@ class QForm extends React.Component {
             if(self.props.useArray === true){
                 entityObject = [self.props.entityObject];
             }
-            self.setState({validationError: null});
+            self.setState({validationError: null, actionInProgress: true, actionAllowed: false});
             self.dataProvider.executeAction(self.props.entitiesName, self.props.okAction, entityObject).then(result => {
                 self.closeDialog();
                 self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
@@ -62,7 +64,8 @@ class QForm extends React.Component {
             }).catch(err => {
                 self.setState({
                     validationError: err.ext ? err.message : "Server inaccessible.",
-                    actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true
+                    actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true,
+                    actionInProgress: false
                 });
             });
         }
@@ -137,7 +140,10 @@ class QForm extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.cancel}>{this.props.cancelButtonText}</Button>
-                    <Button bsStyle="primary" disabled={this.state.validationError ? true : false} onClick={this.ok}>{this.props.okButtonText}</Button>
+                    <Button bsStyle="primary" disabled={!this.state.actionAllowed} onClick={this.ok}>
+                        {this.state.actionInProgress ? <FontAwesome name="spinner" spin /> : null}
+                        {this.props.okButtonText}
+                    </Button>
                 </Modal.Footer>
             </Modal>
         )
