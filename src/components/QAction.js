@@ -3,7 +3,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import {ListControllerEvents, DialogService, DialogResult} from 'atomity-core';
-import ActionConfirmationForm from './ActionConfirmationForm';
+import ActionConfirmationForm from '../dialogs/ActionConfirmationForm';
 import events from 'qnium-events';
 import classNames from 'classnames';
 

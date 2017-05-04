@@ -9,7 +9,7 @@ import FontAwesome from 'react-fontawesome';
 import { DataProviderRegistry, ListControllerEvents, ValidationController, DialogService, DialogResult } from 'atomity-core';
 import events from 'qnium-events';
 import QFormControl from './QFormControl';
-import ActionConfirmationForm from './ActionConfirmationForm';
+import ActionConfirmationForm from '../dialogs/ActionConfirmationForm';
 
 class QForm extends React.Component {
     

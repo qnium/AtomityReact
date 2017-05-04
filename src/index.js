@@ -18,7 +18,10 @@ import {DialogResult} from './components/QForm';
 import QFormControl from './components/QFormControl';
 import QSelectControl from './components/QSelectControl';
 import QInputControl from './components/QInputControl';
+import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
+
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
-    QTable, QTableHeader, QForm, DialogResult, QFormControl, QSelectControl, QInputControl }
+    QTable, QTableHeader, QForm, DialogResult, QFormControl, QSelectControl,
+    QInputControl, DeleteConfirmationWF}

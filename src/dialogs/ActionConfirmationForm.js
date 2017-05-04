@@ -1,5 +1,5 @@
 import React from 'react';
-import QForm from './QForm'
+import QForm from '../components/QForm'
 
 class ActionConfirmationForm extends React.Component
 {   
