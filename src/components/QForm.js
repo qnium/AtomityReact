@@ -146,9 +146,22 @@ class QForm extends React.Component {
         }
     }
     
+    renderOverlay() {
+        if(this.state.actionInProgress){
+            return (
+                <div className="q-form-overlay text-center">
+                    <div className="q-center"><FontAwesome name="refresh" size="3x" spin /></div>
+                </div>)
+        } else {
+            return null
+        }        
+    }
+
     render() {
         return (
             <Modal show={this.state.showDialog} onHide={this.cancel}>
+                {this.renderOverlay()}
+                <div>
                 <Modal.Header closeButton={true}>
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
@@ -163,6 +176,7 @@ class QForm extends React.Component {
                         {this.props.okButtonText}
                     </Button>
                 </Modal.Footer>
+                </div>
             </Modal>
         )
     }
