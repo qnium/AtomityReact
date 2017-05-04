@@ -5,16 +5,22 @@ import Button from 'react-bootstrap/lib/Button';
 import {ListControllerEvents, DialogService, DialogResult} from 'atomity-core';
 import ActionConfirmationForm from './ActionConfirmationForm';
 import events from 'qnium-events';
+import classNames from 'classnames';
 
 class QAction extends Component {
 
-    constructor(props){
+    constructor(props)
+    {
         super(props);
         
         let self = this;
 
         this.onClick = function()
         {
+            if(self.props.disabled === true) {
+                return;
+            }
+            
             if(self.props.workflow) {
                 self.props.workflow.start(self.props.val, self.props.workflowParams);
                 return;
@@ -47,10 +53,10 @@ class QAction extends Component {
         let actionTemplate;
 
         if(this.props.children){
-            actionTemplate = (<span className={this.props.className} style={{cursor: this.props.cursor || 'pointer'}} onClick={this.onClick}>{this.props.children}</span>)
+            actionTemplate = (<span className={classNames(this.props.className, this.props.disabled === true ? "q-action-disabled" : "q-action")} onClick={this.onClick}>{this.props.children}</span>)
         } else {
             actionTemplate = (
-                <Glyphicon title={this.props.title} glyph={this.props.icon} onClick={this.onClick}>
+                <Glyphicon className={classNames(this.props.className, this.props.disabled === true ? "q-action-disabled" : "q-action")} title={this.props.title} glyph={this.props.icon} onClick={this.onClick}>
                     {this.props.children}
                 </Glyphicon>
             )

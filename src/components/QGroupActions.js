@@ -53,7 +53,7 @@ class QGroupActions extends Component
             let actionTemplate;
 
             if(menuItem.type === QAction) {
-                actionTemplate = <QAction {...menuItem.props} val={this.state.checkedItems} targetListCtrlName={this.targetCtrl}>{menuItem.props.title}</QAction>
+                actionTemplate = <QAction disabled={!this.state.actionsAllowed} {...menuItem.props} val={this.state.checkedItems} targetListCtrlName={this.targetCtrl}>{menuItem.props.title}</QAction>
             } else {
                 return null;
                 actionTemplate = menuItem;

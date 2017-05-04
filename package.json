@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "atomity-core": "git+https://github.com/qnium/AtomityFrontendCommon.git",
+    "classnames": "^2.2.5",
     "rc-calendar": "^7.8.0",
     "react": "^15.4.2",
     "react-bootstrap": "0.30.8",

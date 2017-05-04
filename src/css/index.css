@@ -4,6 +4,14 @@ body {
   font-family: sans-serif;
 }
 
+.q-action {
+  cursor: pointer;
+}
+
+.q-action-disabled {
+  cursor: not-allowed;
+}
+
 .panel-footer {
   text-align: center;
 }
