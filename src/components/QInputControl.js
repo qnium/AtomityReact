@@ -8,10 +8,8 @@ class QInputControl extends React.Component
         super(props);
 
         this.state = {
-            controlValue: this.props.entityObject[this.props.bindingField],
-            selectOptions: []
+            controlValue: this.props.entityObject[this.props.bindingField] || ""
         };
-        this.selectCtrlInitialized = false;
     }
 
     onChange(event)

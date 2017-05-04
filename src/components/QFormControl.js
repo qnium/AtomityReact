@@ -2,14 +2,6 @@ import React from 'react';
 
 class QFormControl extends React.Component
 {
-    constructor(props)
-    {
-        super(props);
-        if(this.props.entityObject[this.props.bindingField] === undefined) {
-            this.props.entityObject[this.props.bindingField] = ""; // undefined ???
-        }
-    }
-
     onChange(event)
     {
         this.props.entityObject[this.props.bindingField] = event.newValue;
