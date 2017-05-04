@@ -48,16 +48,7 @@ class QGroupActions extends Component
 
     renderMenuItems()
     {
-        let subItems = this.props.children.props.children;
-        if(!subItems){
-            return null;
-        }
-        
-        if(typeof subItems === "object" && !subItems.length){
-            subItems = [subItems];
-        }
-        
-        return subItems.map((menuItem, index) =>
+        return React.Children.map(this.props.children.props.children, (menuItem, index) =>
         {
             let actionTemplate;
 

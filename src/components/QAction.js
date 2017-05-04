@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
-import {ListControllerEvents} from 'atomity-core';
-
+import {ListControllerEvents, DialogService, DialogResult} from 'atomity-core';
+import ActionConfirmationForm from './ActionConfirmationForm';
 import events from 'qnium-events';
 
 class QAction extends Component {
@@ -20,11 +20,25 @@ class QAction extends Component {
                 return;
             }
             
-            if(self.props.isCustomAction === true) {
-                events(ListControllerEvents.customAction).send({targetName: self.props.targetListCtrlName, data: {action: self.props.action, payload: self.props.val}});
+            if(self.props.useConfirmation === true) {
+                DialogService.showDialog(ActionConfirmationForm).then(result =>
+                {
+                    if(result.dialogResult === DialogResult.ok) {
+                        self.doAction();
+                    }            
+                });            
             } else {
-                events(self.props.action).send({targetName: self.props.targetListCtrlName, data: self.props.val});
+                self.doAction();
             }
+        }
+    }
+
+    doAction()
+    {
+        if(this.props.isCustomAction === true) {
+            events(ListControllerEvents.customAction).send({targetName: this.props.targetListCtrlName, data: {action: this.props.action, payload: this.props.val}});
+        } else {
+            events(this.props.action).send({targetName: this.props.targetListCtrlName, data: this.props.val});
         }
     }
 
