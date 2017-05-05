@@ -24,14 +24,16 @@ class QSelectFilter extends Component
             this.filterCtrl.applyFilter(e.target.value);
         }
         
-        events(ListControllerEvents.stateChanged).handle(event =>
-        {
-            if(event.data.ctrlName === self.filterCtrl.listCtrl.ctrlName && self.props.entitiesName === event.data.entitiesName && !event.data.actionInProgress) {
-                self.setState({
-                    options: event.data.pageData.map(item => item.data)
-                });
-            }
-        });
+        if(this.props.entitiesName) {
+            events(ListControllerEvents.stateChanged).handle(event =>
+            {
+                if(event.data.ctrlName === self.filterCtrl.listCtrl.ctrlName && self.props.entitiesName === event.data.entitiesName && !event.data.actionInProgress) {
+                    self.setState({
+                        options: event.data.pageData.map(item => item.data)
+                    });
+                }
+            });
+        }
     }
     
     renderOptions()
