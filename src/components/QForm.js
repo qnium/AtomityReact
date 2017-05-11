@@ -62,9 +62,10 @@ class QForm extends React.Component {
                     }
                     events(ListControllerEvents.updateEntities).send(entitiesToRefresh);
                 }).catch(err => {
+                    self.dataProvider.errorHandler(err.error);
                     self.setState({
-                        validationError: err.ext ? err.message : "Server inaccessible.",
-                        actionAllowed: err.ext && err.ext.errorCode == -177 ? false : true,
+                        // eslint-disable-next-line
+                        actionAllowed: err.errorCode == -177 ? false : true,
                         actionInProgress: false
                     });
                 });
