@@ -3,7 +3,7 @@ import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
-import {ListControllerEvents} from 'atomity-core';
+import {ListControllerEvents} from 'atomity-frontend-common';
 import QAction from './QAction';
 
 import events from 'qnium-events';

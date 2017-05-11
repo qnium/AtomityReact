@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import {ListControllerEvents} from 'atomity-core';
+import {ListControllerEvents} from 'atomity-frontend-common';
 
 import events from 'qnium-events';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import {InputFilterController} from 'atomity-core';
+import {InputFilterController} from 'atomity-frontend-common';
 
 //import Calendar from 'rc-calendar';
 //import 'rc-calendar/dist/rc-calendar.css';

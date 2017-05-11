@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {InputFilterController} from 'atomity-core';
+import {InputFilterController} from 'atomity-frontend-common';
 
 class QInputFilter extends Component 
 {    

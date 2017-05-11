@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {SelectFilterController} from 'atomity-core';
-import {ListControllerEvents} from 'atomity-core';
+import {SelectFilterController} from 'atomity-frontend-common';
+import {ListControllerEvents} from 'atomity-frontend-common';
 import events from 'qnium-events';
 
 class QSelectFilter extends Component 

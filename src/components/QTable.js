@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/lib/Table';
-import {ListController} from 'atomity-core';
+import {ListController} from 'atomity-frontend-common';
 import QTableHeader from './QTableHeader';
 import QColumn from './QColumn';
 import FontAwesome from 'react-fontawesome';
-import {ListControllerEvents} from 'atomity-core';
+import {ListControllerEvents} from 'atomity-frontend-common';
 
 import events from 'qnium-events';
 

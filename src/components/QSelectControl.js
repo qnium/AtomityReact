@@ -1,7 +1,7 @@
 import React from 'react';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {ListControllerEvents} from 'atomity-core';
-import {ListController} from 'atomity-core';
+import {ListControllerEvents} from 'atomity-frontend-common';
+import {ListController} from 'atomity-frontend-common';
 import events from 'qnium-events';
 
 class QSelectControl extends React.Component

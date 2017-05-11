@@ -6,7 +6,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Alert from 'react-bootstrap/lib/Alert';
 import FontAwesome from 'react-fontawesome';
-import { DataProviderRegistry, ListControllerEvents, ValidationController, DialogService, DialogResult } from 'atomity-core';
+import { DataProviderRegistry, ListControllerEvents, ValidationController, DialogService, DialogResult } from 'atomity-frontend-common';
 import events from 'qnium-events';
 import QFormControl from './QFormControl';
 import ActionConfirmationForm from '../dialogs/ActionConfirmationForm';
