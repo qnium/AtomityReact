@@ -14,14 +14,13 @@ import QSelectFilter from './components/QSelectFilter';
 import QTable from './components/QTable';
 import QTableHeader from './components/QTableHeader';
 import QForm from './components/QForm';
-import {DialogResult} from './components/QForm';
 import QFormControl from './components/QFormControl';
 import QSelectControl from './components/QSelectControl';
 import QInputControl from './components/QInputControl';
 import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
-
+import DialogService, {DialogResult} from './services/DialogService';
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
-    QTable, QTableHeader, QForm, DialogResult, QFormControl, QSelectControl,
-    QInputControl, DeleteConfirmationWF}
+    QTable, QTableHeader, QForm, QFormControl, QSelectControl,
+    QInputControl, DeleteConfirmationWF, DialogService, DialogResult }
