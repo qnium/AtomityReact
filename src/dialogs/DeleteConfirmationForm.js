@@ -1,5 +1,5 @@
 import React from 'react';
-import {QForm} from 'atomity-react'
+import QForm from '../components/QForm'
 
 class DeleteConfirmationForm extends React.Component
 {   

@@ -1,6 +1,5 @@
 import DeleteConfirmationForm from '../dialogs/DeleteConfirmationForm';
-import {DialogService} from 'atomity-frontend-common';
-import {DialogResult} from 'atomity-react';
+import {DialogService, DialogResult} from 'atomity-frontend-common';
 
 let DeleteConfirmationWF =
 {
