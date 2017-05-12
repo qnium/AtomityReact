@@ -63,8 +63,15 @@ class QForm extends React.Component {
                     }
                     events(ListControllerEvents.updateEntities).send(entitiesToRefresh);
                 }).catch(err => {
-                    self.dataProvider.errorHandler(err.error);
+                    let errorMessage = null;
+                    if(err.errorCode != -177){
+                        self.dataProvider.errorHandler(err.error);
+                    } else {
+                        errorMessage = err.error;
+                    }
+                    
                     self.setState({
+                        validationError: errorMessage,
                         // eslint-disable-next-line
                         actionAllowed: err.errorCode == -177 ? false : true,
                         actionInProgress: false
