@@ -43,7 +43,7 @@ class QAction extends Component {
     doAction()
     {
         if(this.props.isCustomAction === true) {
-            events(ListControllerEvents.customAction).send({targetName: this.props.targetListCtrlName, data: {action: this.props.action, payload: this.props.val}});
+            events(ListControllerEvents.customAction).send({targetName: this.props.targetListCtrlName, data: {action: this.props.action, data: this.props.val}});
         } else {
             events(this.props.action).send({targetName: this.props.targetListCtrlName, data: this.props.val});
         }
