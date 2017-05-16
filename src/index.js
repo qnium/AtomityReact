@@ -17,10 +17,11 @@ import QForm from './components/QForm';
 import QFormControl from './components/QFormControl';
 import QSelectControl from './components/QSelectControl';
 import QInputControl from './components/QInputControl';
+import QTextControl from './components/QTextControl';
 import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
 import DialogService, {DialogResult} from './services/DialogService';
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
-    QTable, QTableHeader, QForm, QFormControl, QSelectControl,
+    QTable, QTableHeader, QForm, QFormControl, QSelectControl, QTextControl,
     QInputControl, DeleteConfirmationWF, DialogService, DialogResult }
