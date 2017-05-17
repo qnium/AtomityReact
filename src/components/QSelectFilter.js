@@ -39,7 +39,7 @@ class QSelectFilter extends Component
     renderOptions()
     {
         return this.state.options.map((item, index) => {
-            return (<option key={index} value={item[this.props.valueField]}>{item[this.props.displayField]}</option>)
+            return (<option key={index} value={item[this.props.valueField || "id"]}>{item[this.props.displayField || "name"]}</option>)
         }, this);
     }
     
