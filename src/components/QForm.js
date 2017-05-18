@@ -138,7 +138,7 @@ class QForm extends React.Component {
         }
 
         if(typeof children === "function"){
-            return children(this.props.val);
+            return children(this.props.entityObject);
         }
 
         return children;
