@@ -10,7 +10,7 @@ let container;
 
 let DialogService = 
 {
-    showDialog: (dialogTemplate, dialogData, parentElement) =>
+    showDialog: (dialog, dialogData, parentElement) =>
     {
         dialogData = Object.assign({}, dialogData);
         
@@ -30,7 +30,7 @@ let DialogService =
             }
             
             ReactDOM.render(
-                React.createElement(dialogTemplate, {val: dialogData, onDialogClose: onDialogClose}),
+                React.createElement(dialog, {val: dialogData, onDialogClose: onDialogClose}),
                 dialogContainer
             );
         });
