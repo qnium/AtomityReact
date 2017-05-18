@@ -79,7 +79,7 @@ class QForm extends React.Component {
                 });
             } else {
                 self.closeDialog();
-                self.props.onDialogClose({dialogResult: DialogResult.ok});
+                self.props.onDialogClose({dialogResult: DialogResult.ok, entityObject: self.props.entityObject});
             }
         }
         
