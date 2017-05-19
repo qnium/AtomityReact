@@ -6,6 +6,7 @@ class QFormControl extends React.Component
     {
         this.props.entityObject[this.props.bindingField] = event.newValue;
         if(this.props.onChange) {
+            event.bindingField = this.props.bindingField;
             this.props.onChange(event);
         }
     }

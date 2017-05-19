@@ -10,28 +10,33 @@ class QSelectControl extends React.Component
     {
         super(props);
 
-        if(!this.props.entityObject[this.props.bindingField] && this.props.valueField) {
+        if(!this.props.entityObject[this.props.bindingField] && this.props.foreignField) {
             this.props.entityObject[this.props.bindingField] = {};
         }
         
         let val = this.props.entityObject[this.props.bindingField];
-        if(this.props.valueField){
-            val = val[this.props.valueField];
+        if(this.props.foreignField){
+            val = val[this.props.foreignField];
         }
         this.state = {
             controlValue: val,
             selectOptions: []
         };
         this.selectCtrlInitialized = false;
+
+        this.valField = this.props.valueField || "id";
+        this.dispField = this.props.displayField || "name";
     }
 
     onChange(event)
     {
         let oldValue;
         let newValue;
-        if(this.props.valueField) {
-            oldValue = this.state.selectOptions.find(item => item[this.props.valueField] == this.state.controlValue);
-            newValue = this.state.selectOptions.find(item => item[this.props.valueField] == event.target.value);
+        if(this.props.foreignField) {
+            // eslint-disable-next-line
+            oldValue = this.state.selectOptions.find(item => item[this.valField] == this.state.controlValue);
+            // eslint-disable-next-line
+            newValue = this.state.selectOptions.find(item => item[this.valField] == event.target.value);
         } else {
             oldValue = this.state.controlValue;
             newValue = event.target.value;
@@ -42,7 +47,6 @@ class QSelectControl extends React.Component
         if(this.props.onChange)
         {
             this.props.onChange({
-                bindingField: this.props.bindingField,
                 oldValue: oldValue,
                 newValue: newValue
             });
@@ -52,7 +56,7 @@ class QSelectControl extends React.Component
     renderOptions()
     {
         return this.state.selectOptions.map((item, index) => {
-            return (<option key={index} value={item[this.props.valueField]}>{item[this.props.displayField]}</option>)
+            return (<option key={index} value={item[this.valField]}>{item[this.dispField]}</option>)
         }, this);
     }    
 
@@ -77,7 +81,8 @@ class QSelectControl extends React.Component
                 if(!self.selectCtrlInitialized && event.data.pageData.length > 0 && self.props.onInit) {
                     self.selectCtrlInitialized = true;
                     self.props.onInit(
-                        self.state.selectOptions.find(item => item[self.props.valueField] == self.state.controlValue)
+                        // eslint-disable-next-line
+                        self.state.selectOptions.find(item => item[self.valField] == self.state.controlValue)
                     );
                 }
             }

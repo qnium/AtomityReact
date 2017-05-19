@@ -1,7 +1,7 @@
 import React from 'react';
 import FormControl from 'react-bootstrap/lib/FormControl';
 
-class QTextControl extends React.Component
+class QTextAreaControl extends React.Component
 {
     constructor(props)
     {
@@ -36,4 +36,4 @@ class QTextControl extends React.Component
     }
 }
 
-export default QTextControl;
+export default QTextAreaControl;

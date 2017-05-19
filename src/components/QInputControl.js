@@ -20,7 +20,6 @@ class QInputControl extends React.Component
         if(this.props.onChange)
         {
             this.props.onChange({
-                bindingField: this.props.bindingField,
                 oldValue: oldValue,
                 newValue: event.target.value
             });
