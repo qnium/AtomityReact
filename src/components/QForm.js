@@ -123,7 +123,7 @@ class QForm extends React.Component {
         if(children.type === QFormControl) {
             return (
                 <QFormControl key={index} inputRef={children.ref} {...children.props} onChange={this.onChange.bind(this, children.props.onChange)}
-                    entityObject={this.props.entityObject} dataProviderName={children.props.dataProviderName || this.props.dataProviderName }>
+                    entityObject={children.props.entityObject || this.props.entityObject} dataProviderName={children.props.dataProviderName || this.props.dataProviderName }>
                     {children.props.children}
                 </QFormControl>
             );
