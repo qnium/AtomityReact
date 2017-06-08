@@ -9,11 +9,28 @@ class QInputFilter extends Component
     constructor(props)
     {
         super(props);
+
+        this.state = {
+            value: props.value
+        }
         
-        let filterCtrl = new InputFilterController(this.props);
-        
+        this.filterCtrl = new InputFilterController(this.props);
+
         this.onChangeFilterValue = (e) => {
-            filterCtrl.applyFilter(e.target.value);
+            this.setState({value: e.target.value});
+            this.filterCtrl.applyFilter(e.target.value);
+        }
+    }
+
+    filterCtrl = null;
+
+    componentWillReceiveProps(nextProps)
+    {
+        const { value } = nextProps;
+        this.setState({ value });
+        if (typeof value !== 'undefined' && value !== null)
+        {
+            this.filterCtrl.applyFilter(value);
         }
     }
     
@@ -23,7 +40,13 @@ class QInputFilter extends Component
             <form>
                 <FormGroup controlId={this.props.targetListCtrlName + this.props.filteringField}>
                     <ControlLabel>{this.props.title}</ControlLabel>
-                    <FormControl id={this.props.targetListCtrlName + this.props.filteringField} type="text" placeholder={this.props.placeholder} defaultValue="" onChange={this.onChangeFilterValue} />
+                    <FormControl 
+                        id={this.props.targetListCtrlName + this.props.filteringField}
+                        type="text" 
+                        placeholder={this.props.placeholder}
+                        value={this.state.value}
+                        onChange={this.onChangeFilterValue}
+                    />
                 </FormGroup>
             </form>
         )
