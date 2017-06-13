@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const DEFAULT_EDITOR_CONFIG = {
     modules: {
@@ -47,14 +48,16 @@ class QRTEControl extends Component
     }
 
     render() {
-        const { modules, formats } = this.props;
+        const { modules, formats, placeholder } = this.props;
         const activeModules = modules ? modules : DEFAULT_EDITOR_CONFIG.modules;
         const activeFormats = formats ? formats : DEFAULT_EDITOR_CONFIG.formats;
 
         return (
             <ReactQuill
+                theme="snow"
                 modules={activeModules}
                 formats={activeFormats}
+                placeholder={placeholder}
                 value={this.state.controlValue}
                 onChange={this.onChange}
             />
