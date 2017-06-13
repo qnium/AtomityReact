@@ -1,71 +1,25 @@
-import React from 'react';
-import ReactDOM from "react-dom";
-import CKEDITOR from 'ckeditor';
-//import CKEditor from 'react-ckeditor-wrapper';
+import React, { Component } from 'react';
+import ReactQuill from 'react-quill';
 
 const DEFAULT_EDITOR_CONFIG = {
-
+    modules: {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline','strike', 'blockquote'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image'],
+            ['clean']
+        ]
+    },
+    formats: [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image'
+    ]
 };
 
-class CKEditor extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: props.value,
-            config: props.config || {},
-            onChange: props.onChange
-        };
-    }
-
-    handleChange() {
-        this.state.onChange(this.state.value);
-    }
-
-    componentDidMount() {
-        /*if (!window.CKEDITOR) {
-            console.error("CKEditor not found");
-            return;
-        }*/
-
-        this.instance = CKEDITOR.appendTo(
-            ReactDOM.findDOMNode(this),
-            this.state.config,
-            this.state.value
-        );
-        this.instance.on("change", () => {
-            this.state.value = this.instance.getData();
-            this.handleChange();
-        });
-    }
-
-  componentWillReceiveProps(props) {
-    if (!this.instance) {
-        return;
-    }
-
-    if (this.state.value !== props.value) {
-        // setData will move the cursor to the begining of the input
-        this.instance.setData(props.value);
-    }
-
-    if (props.config && this.state.config !== props.config) {
-        if ("readOnly" in props.config)
-        this.instance.setReadOnly(props.config.readOnly);
-    }
-
-    this.setState({
-        value: props.value,
-        config: props.config || {},
-        onChange: props.onChange
-    });
-  }
-
-    render() {
-        return <div />;
-    }
-}
-
-class QRTEControl extends React.Component
+class QRTEControl extends Component
 {
     constructor(props)
     {
@@ -93,13 +47,14 @@ class QRTEControl extends React.Component
     }
 
     render() {
-        const editorConfig = {
-            DEFAULT_EDITOR_CONFIG,
-            ...this.props.config
-        };
+        const { modules, formats } = this.props;
+        const activeModules = modules ? modules : DEFAULT_EDITOR_CONFIG.modules;
+        const activeFormats = formats ? formats : DEFAULT_EDITOR_CONFIG.formats;
+
         return (
-            <CKEditor
-                config={editorConfig}
+            <ReactQuill
+                modules={activeModules}
+                formats={activeFormats}
                 value={this.state.controlValue}
                 onChange={this.onChange}
             />
