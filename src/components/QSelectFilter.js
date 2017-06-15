@@ -46,15 +46,13 @@ class QSelectFilter extends Component
     render()
     {
         return (
-            <form>
-                <FormGroup controlId={"SelectFilter" + this.props.targetListCtrlName + this.props.filteringField}>
-                    <ControlLabel>{this.props.title}</ControlLabel>
-                    <FormControl id={"SelectFilter" + this.props.targetListCtrlName + this.props.filteringField} componentClass="select" defaultValue="" onChange={this.onChangeFilterValue}>
-                        {this.props.children}
-                        {this.renderOptions()}
-                    </FormControl>
-                </FormGroup>
-            </form>
+            <FormGroup controlId={"SelectFilter" + this.props.targetListCtrlName + this.props.filteringField}>
+                <ControlLabel>{this.props.title}</ControlLabel>
+                <FormControl id={"SelectFilter" + this.props.targetListCtrlName + this.props.filteringField} componentClass="select" defaultValue="" onChange={this.onChangeFilterValue}>
+                    {this.props.children}
+                    {this.renderOptions()}
+                </FormControl>
+            </FormGroup>
         )
     }
 }

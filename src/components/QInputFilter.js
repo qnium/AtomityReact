@@ -37,7 +37,6 @@ class QInputFilter extends Component
     render()
     {
         return (
-            <form>
                 <FormGroup controlId={this.props.targetListCtrlName + this.props.filteringField}>
                     <ControlLabel>{this.props.title}</ControlLabel>
                     <FormControl 
@@ -48,7 +47,6 @@ class QInputFilter extends Component
                         onChange={this.onChangeFilterValue}
                     />
                 </FormGroup>
-            </form>
         )
     }
 }
