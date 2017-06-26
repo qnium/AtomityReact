@@ -15,11 +15,12 @@ class QColumn extends Component {
             return <QAction {...children.props} className={this.props.isHoverButtons ? "q-row-button" : ""} key={index}  val={this.props.val} />
         }
 
-        if(children.type === QRowChecker) {
-            return (<QRowChecker {...children.props}
-                targetListCtrlName={children.props.targetListCtrlName || this.props.targetListCtrlName}
-                val={this.props.pageItem}                
-            />)
+        if(children.type === QRowChecker || children.props && children.props.rowCheckerClass && children.type === children.props.rowCheckerClass) {
+            return (
+                React.createElement(children.props.rowCheckerClass || QRowChecker, {...children.props,
+                targetListCtrlName: children.props.targetListCtrlName || this.props.targetListCtrlName,
+                val: this.props.pageItem
+            }))
         }
 
         if(typeof children === "object" && children.length !== undefined){

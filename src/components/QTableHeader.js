@@ -60,8 +60,9 @@ class QTableHeader extends Component
     }
     
     renderChildren() {
-        if(this.props.children && this.props.children.type === QGroupActions) {
-            return <QGroupActions {...this.props} targetListCtrlName={this.props.children.props.targetListCtrlName || this.targetCtrl}/>
+        if(this.props.children && this.props.children.type === QGroupActions 
+            || this.props.children && this.props.children.props && this.props.children.props.groupActionsClass && this.props.children.type === this.props.children.props.groupActionsClass) {
+                return React.createElement(this.props.children.props.groupActionsClass || QGroupActions, {...this.props, targetListCtrlName: this.props.children.props.targetListCtrlName || this.targetCtrl});
         } else {
             return this.props.children
         }
