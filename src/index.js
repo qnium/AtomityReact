@@ -17,6 +17,7 @@ import QForm from './components/QForm';
 import QFormControl from './components/QFormControl';
 import QSelectControl from './components/QSelectControl';
 import QInputControl from './components/QInputControl';
+import QMaskedInputControl from './components/QMaskedInputControl';
 import QTextAreaControl from './components/QTextAreaControl';
 import QRTEControl from './components/QRTEControl';
 import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
@@ -25,4 +26,4 @@ import DialogService, {DialogResult} from './services/DialogService';
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
     QTable, QTableHeader, QForm, QFormControl, QSelectControl, QTextAreaControl,
-    QInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult }
+    QInputControl, QMaskedInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult }
