@@ -42,9 +42,14 @@ class QTable extends Component {
             } else {
                 childrenArray = [this.props.children];
             }
+            
+            let tableHeader = [];
 
-            let tableHeader = childrenArray.filter((element) => {
-                return element.type === QTableHeader;
+            childrenArray.forEach(item => {
+                if(item.type === QTableHeader)
+                    tableHeader.push(item);
+                if(item.length)
+                    tableHeader = tableHeader.concat(item.filter(el => el.type === QTableHeader));
             });
             
             this.headerTemplate = 
@@ -55,9 +60,14 @@ class QTable extends Component {
                         />)
                 }</tr></thead>;
 
-            this.columns = childrenArray.filter((element) => {
-                return element.type === QColumn;
-            });            
+            this.columns = [];
+
+            childrenArray.forEach(item => {
+                if(item.type === QColumn)
+                    this.columns.push(item);
+                if(item.length)
+                    this.columns = this.columns.concat(item.filter(el => el.type === QColumn));
+            });
         }        
     }
     

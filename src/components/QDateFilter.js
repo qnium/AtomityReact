@@ -35,23 +35,21 @@ class QDateFilter extends Component
     render()
     {
         return (
-            <form>
-                <FormGroup controlId={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation}>
-                    <ControlLabel>{this.props.title}</ControlLabel>
-                    {/*<Calendar id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
-                    {/*<RcDatePicker id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
-                    {/*<DatePicker id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
-                    {/*<DateTimeField id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
-                    <Datetime id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation}
-                        onChange={this.onChangeFilterValue}
-                        utc={false} timeFormat="HH:mm"
-                        inputProps={{
-                            id: this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation,
-                            placeholder: this.props.placeholder
-                        }}
-                    />
-                </FormGroup>
-            </form>
+            <FormGroup controlId={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation}>
+                <ControlLabel>{this.props.title}</ControlLabel>
+                {/*<Calendar id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
+                {/*<RcDatePicker id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
+                {/*<DatePicker id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
+                {/*<DateTimeField id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation} onChange={this.onChangeFilterValue} />*/}
+                <Datetime id={this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation}
+                    onChange={this.onChangeFilterValue}
+                    utc={false} timeFormat="HH:mm"
+                    inputProps={{
+                        id: this.props.targetListCtrlName + this.props.filteringField + this.props.filteringOperation,
+                        placeholder: this.props.placeholder
+                    }}
+                />
+            </FormGroup>
         )
     }
 }
