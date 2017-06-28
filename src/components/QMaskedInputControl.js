@@ -30,14 +30,18 @@ class QMaskedInputControl extends React.Component
     }
 
     render() {
-        const { id, mask, inputRef, placeholder } = this.props;
+        const { id, mask, inputRef, placeholder, placeholderChar } = this.props;
         return (
             <MaskedInput
+                className="form-control"
                 mask={mask}
                 id={id}
+                inputRef={inputRef}
                 placeholder={placeholder}
+                placeholderChar={placeholderChar}
                 value={this.state.controlValue}
-                onChange={this.onChange} />
+                onChange={this.onChange}
+            />
         )
     }
 }
