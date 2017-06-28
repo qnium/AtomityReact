@@ -36,7 +36,6 @@ class QMaskedInputControl extends React.Component
                 className="form-control"
                 mask={mask}
                 id={id}
-                inputRef={inputRef}
                 placeholder={placeholder}
                 placeholderChar={placeholderChar}
                 value={this.state.controlValue}
