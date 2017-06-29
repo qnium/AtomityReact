@@ -65,7 +65,7 @@ class QGroupActions extends Component
 
     render() {
         return (
-            <ButtonGroup>
+            <ButtonGroup className="q-group-actions-button-group">
                 <Button bsSize="small" onClick={this.checkBoxClick}>
                     <input type="checkbox" checked={this.state.allChecked} />
                 </Button>

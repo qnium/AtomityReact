@@ -65,3 +65,8 @@
 .q-bs-pagination .pagination {
   margin: 0;
 }
+
+
+.btn-group.q-group-actions-button-group {
+  display: flex;
+}

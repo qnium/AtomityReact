@@ -28,8 +28,14 @@ class QInputControl extends React.Component
 
     render() {
         return (
-            <FormControl id={this.props.id} inputRef={this.props.inputRef} type="text" placeholder={this.props.placeholder} value={this.state.controlValue}
+            <FormControl
+                id={this.props.id}
+                inputRef={this.props.inputRef}
+                type="text"
+                placeholder={this.props.placeholder}
+                value={this.state.controlValue}
                 onChange={this.onChange.bind(this)}
+                disabled={this.props.disabled}
             />
         )
     }
