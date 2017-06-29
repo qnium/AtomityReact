@@ -27,7 +27,7 @@ class QTable extends Component {
                 actionInProgress: target.actionInProgress
             });
         }
-        events(ListControllerEvents.stateChanged).handle(event => {
+        this.handlerRemover = events(ListControllerEvents.stateChanged).handle(event => {
             if(event.sourceName === this.listCtrl.ctrlName) {
                 this.ctrlStateListener(event.data);
             }
@@ -71,6 +71,10 @@ class QTable extends Component {
         }        
     }
     
+    componentWillUnmount(){
+        this.handlerRemover();
+    }
+
     renderRow(pageItem)
     {        
         if(this.columns) {
@@ -95,7 +99,9 @@ class QTable extends Component {
         if(this.state.actionInProgress){
             return (
                 <div className="q-overlay text-center">
-                    <div className="q-center"><FontAwesome name="refresh" size="3x" spin /></div>
+                    <div className="q-center">
+                        {this.props.progressIndicator ? this.props.progressIndicator : <FontAwesome name="refresh" size="3x" spin />}
+                    </div>
                 </div>)
         } else {
             return null

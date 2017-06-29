@@ -39,7 +39,7 @@ class QTableHeader extends Component
     }
 
     componentDidMount() {
-        events(ListControllerEvents.stateChanged).handle(event => {
+        this.handlerRemover = events(ListControllerEvents.stateChanged).handle(event => {
             if(event.sourceName === this.targetCtrl) {
                 this.ctrlStateListener(event.data);
             }
@@ -47,7 +47,7 @@ class QTableHeader extends Component
     };    
     
     componentWillUnmount() {
-        //window.QEventEmitter.removeListener(this.ctrlStateListener);
+        this.handlerRemover();
     };
 
     renderSortIcon(){
