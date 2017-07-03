@@ -27,4 +27,4 @@ import DialogService, {DialogResult} from './services/DialogService';
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
     QTable, QTableHeader, QForm, QFormControl, QSelectControl, QTextAreaControl,
-    QInputControl, QMaskedInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult }
+    QInputControl, QMaskedInputControl, QNumericInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult }
