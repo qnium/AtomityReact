@@ -73,6 +73,7 @@ class QTable extends Component {
     
     componentWillUnmount(){
         this.handlerRemover();
+        this.listCtrl.destroy();
     }
 
     renderRow(pageItem)
