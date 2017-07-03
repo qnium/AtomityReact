@@ -18,6 +18,7 @@ import QFormControl from './components/QFormControl';
 import QSelectControl from './components/QSelectControl';
 import QInputControl from './components/QInputControl';
 import QMaskedInputControl from './components/QMaskedInputControl';
+import QNumericInputControl from './components/QNumericInputControl';
 import QTextAreaControl from './components/QTextAreaControl';
 import QRTEControl from './components/QRTEControl';
 import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
