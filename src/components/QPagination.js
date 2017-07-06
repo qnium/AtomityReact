@@ -59,7 +59,8 @@ class QPagination extends Component
                 activePage={this.state.activePage}
                 onSelect={this.handleSelect}
                 ellipsis={this.props.ellipsis === undefined ? true : this.props.ellipsis}
-                boundaryLinks={this.props.boundaryLinks === undefined ? true : this.props.boundaryLinks}                
+                boundaryLinks={this.props.boundaryLinks === undefined ? true : this.props.boundaryLinks}
+                buttonComponentClass={this.props.buttonComponentClass}
             />
         );
     }    
