@@ -7,8 +7,7 @@ const DEFAULT_EDITOR_CONFIG = {
         toolbar: [
             [{ 'header': [1, 2, 3, 4, false] }],
             ['bold', 'italic', 'underline','strike', 'blockquote'],
-            [{ 'font': [] }],
-            [{ 'align': 'left' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
+            ['align', { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
             [{ 'color': [] }, { 'background': [] }],
             [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
             ['link', 'image'],
@@ -19,7 +18,9 @@ const DEFAULT_EDITOR_CONFIG = {
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
-        'link', 'image'
+        'link', 'image',
+        'align',
+        'color', 'background'
     ]
 };
 
