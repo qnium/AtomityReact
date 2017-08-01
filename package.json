@@ -4,7 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "atomity-frontend-common": "git+https://github.com/qnium/AtomityFrontendCommon.git",
+    "atomity-frontend-common": "git+https://github.com/qnium/AtomityFrontendCommon.git#15e5d07",
     "classnames": "^2.2.5",
     "rc-calendar": "^7.8.0",
     "react": "^15.4.2",
