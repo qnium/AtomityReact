@@ -120,7 +120,7 @@ class QTable extends Component {
                 <tbody>{
                     this.state.pageData.map(function(pageItem, index) {
                         return (                        
-                            <tr key={index}>
+                            <tr key={index} className={index%2 !== 0 ? this.props.evenRowClass : this.props.oddRowClass}>
                                 {this.renderRow(pageItem)}
                             </tr>
                         )
