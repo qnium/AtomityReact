@@ -5,8 +5,11 @@ import 'react-quill/dist/quill.snow.css';
 const DEFAULT_EDITOR_CONFIG = {
     modules: {
         toolbar: [
-            [{ 'header': [1, 2, false] }],
+            [{ 'header': [1, 2, 3, 4, false] }],
             ['bold', 'italic', 'underline','strike', 'blockquote'],
+            [{ 'font': [] }],
+            [{ 'align': 'left' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
+            [{ 'color': [] }, { 'background': [] }],
             [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
             ['link', 'image'],
             ['clean']
