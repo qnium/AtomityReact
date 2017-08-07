@@ -13,7 +13,7 @@ class QFormControl extends React.Component
 
     render() {
         return (
-            React.createElement(this.props.type, {...this.props, onChange: this.onChange.bind(this)} , this.props.children)
+            React.createElement(this.props.type, {...this.props, ref: this.props.inputRef, onChange: this.onChange.bind(this)} , this.props.children)
         );
     }
 }
