@@ -65,7 +65,10 @@ class QForm extends React.Component {
                 }).catch(err => {
                     let errorMessage = null;
                     if(err.errorCode != -177){
-                        self.dataProvider.errorHandler(err.error, err);
+                        let hResult = self.dataProvider.errorHandler(err.error, err);
+                        if (hResult) {
+                            this.closeDialog();
+                        }
                     } else {
                         errorMessage = err.error;
                     }
