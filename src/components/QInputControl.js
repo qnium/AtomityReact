@@ -31,7 +31,7 @@ class QInputControl extends React.Component
             <FormControl
                 id={this.props.id}
                 inputRef={this.props.inputRef}
-                type="text"
+                type={this.props.password ? "password" : "text" }
                 placeholder={this.props.placeholder}
                 value={this.state.controlValue}
                 onChange={this.onChange.bind(this)}

@@ -133,9 +133,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-"atomity-frontend-common@git+https://github.com/qnium/AtomityFrontendCommon.git#15e5d07":
+"atomity-frontend-common@git+https://github.com/qnium/AtomityFrontendCommon.git#4e61d0b":
   version "0.1.0"
-  resolved "git+https://github.com/qnium/AtomityFrontendCommon.git#15e5d07"
+  resolved "git+https://github.com/qnium/AtomityFrontendCommon.git#4e61d0be785a5f1b0ff9be2f81725000e3d0e543"
   dependencies:
     moment "^2.18.1"
     moment-timezone "^0.5.13"
