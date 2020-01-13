@@ -1,15 +1,20 @@
 import React from 'react';
 import QForm from '../components/QForm'
 
-class ActionConfirmationForm extends React.Component
-{   
+const ActionConfirmationParams = {
+    title: "Action confirmation...",
+    message: "Are you sure you want to perform this action?",
+    yesButton: "Yes",
+    noButton: "No"
+}
+
+class ActionConfirmationForm extends React.Component {
     render = () => (
-        <QForm okButtonText="Yes" disableConfirmation={true} cancelButtonText="No" title="Action confirmation..." onDialogClose={this.props.onDialogClose}>
-            <form>
-                <p className="text-center"><strong>Are you sure you want to perform this action?</strong></p>
-            </form>
+        <QForm okButtonText={ActionConfirmationParams.yesButton} disableConfirmation={true} cancelButtonText={ActionConfirmationParams.noButton} title={ActionConfirmationParams.title} onDialogClose={this.props.onDialogClose}>
+            <p className="text-center"><strong>{ActionConfirmationParams.message}</strong></p>
         </QForm>
     )
 }
 
+export { ActionConfirmationParams };
 export default ActionConfirmationForm;

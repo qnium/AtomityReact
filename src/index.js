@@ -23,8 +23,11 @@ import QTextAreaControl from './components/QTextAreaControl';
 import QRTEControl from './components/QRTEControl';
 import DeleteConfirmationWF from './workflows/DeleteConfirmationWF';
 import DialogService, {DialogResult} from './services/DialogService';
+import ActionConfirmationForm, {ActionConfirmationParams} from './dialogs/ActionConfirmationForm';
+import DeleteConfirmationForm from './dialogs/DeleteConfirmationForm';
 
 export { QAction, QColumn, QDateFilter, QGroupActions, QInputFilter,
     QPagination, QProgressIndicator, QRowChecker, QSelectFilter,
     QTable, QTableHeader, QForm, QFormControl, QSelectControl, QTextAreaControl,
-    QInputControl, QMaskedInputControl, QNumericInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult }
+    QInputControl, QMaskedInputControl, QNumericInputControl, QRTEControl, DeleteConfirmationWF, DialogService, DialogResult,
+    ActionConfirmationForm, ActionConfirmationParams, DeleteConfirmationForm }
