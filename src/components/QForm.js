@@ -171,7 +171,7 @@ class QForm extends React.Component {
 
     render() {
         return (
-            <Modal show={this.state.showDialog} onHide={this.cancel}>
+            <Modal show={this.state.showDialog} onHide={this.cancel} backdrop={this.props.backdrop != undefined ? this.props.backdrop : 'static'}>
                 {this.renderOverlay()}
                 <div>
                 <Modal.Header closeButton={true}>
