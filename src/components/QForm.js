@@ -181,13 +181,17 @@ class QForm extends React.Component {
                     {this.renderError()}
                     {this.renderRecursively(this.props.children)}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={this.cancel}>{this.props.cancelButtonText || "Cancel"}</Button>
-                    <Button bsStyle="primary" disabled={!this.state.actionAllowed} onClick={this.ok}>
-                        {this.state.actionInProgress ? <FontAwesome name="spinner" spin /> : null}
-                        {this.props.okButtonText || "OK"}
-                    </Button>
-                </Modal.Footer>
+                {(this.props.hideCancelButton && this.props.hideOkButton) ? null :
+                    <Modal.Footer>
+                        {this.props.hideCancelButton ? null : <Button onClick={this.cancel}>{this.props.cancelButtonText || "Cancel"}</Button> }
+                        {this.props.hideOkButton ? null :
+                            <Button bsStyle="primary" disabled={!this.state.actionAllowed} onClick={this.ok}>
+                                {this.state.actionInProgress ? <FontAwesome name="spinner" spin /> : null}
+                                {this.props.okButtonText || "OK"}
+                            </Button>
+                        }
+                    </Modal.Footer>
+                }
                 </div>
             </Modal>
         )
